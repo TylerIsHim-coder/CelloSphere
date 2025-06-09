@@ -1,0 +1,3588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CelloSphere - Complete Teaching System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary: #64748b;
+            --accent: #0ea5e9;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #06b6d4;
+            
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-tertiary: #64748b;
+            
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+
+            /* Responsive variables */
+            --sidebar-width: 280px;
+            --content-padding: 2rem;
+            --card-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Enhanced Login/Signup Styles */
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            padding: 1rem;
+        }
+
+        .auth-card {
+            background: var(--bg-primary);
+            padding: 3rem 2.5rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 420px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light);
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-logo i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-logo h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .auth-logo p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            background: var(--bg-primary);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 0.875rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .demo-info {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            border-left: 4px solid var(--info);
+        }
+
+        /* Enhanced Dashboard Styles - Mobile First Approach */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+
+        /* Mobile-first sidebar design */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-primary);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        /* Overlay for mobile sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sidebar-logo i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .sidebar-logo h2 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        /* Mobile close button */
+        .sidebar-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            display: none;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 1rem 0;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-section-title {
+            padding: 0 1.5rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-left-color: var(--border);
+        }
+
+        .nav-link.active {
+            background: var(--bg-tertiary);
+            color: var(--primary);
+            border-left-color: var(--primary);
+        }
+
+        .nav-link i {
+            width: 1.25rem;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .nav-link span {
+            white-space: nowrap;
+        }
+
+        .sidebar-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .main-content {
+            flex: 1;
+            background: var(--bg-secondary);
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .top-bar {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+        }
+
+        .menu-toggle:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .top-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notification-btn {
+            position: relative;
+            padding: 0.5rem;
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .notification-btn:hover {
+            background: var(--gray-200);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: var(--danger);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.125rem 0.375rem;
+            border-radius: 999px;
+            min-width: 1.25rem;
+            height: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-wrapper {
+            padding: var(--content-padding);
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-weight: 500;
+        }
+
+        .alert-info {
+            background: rgb(6 182 212 / 0.1);
+            color: #0e7490;
+            border: 1px solid rgb(6 182 212 / 0.2);
+        }
+
+        .alert-success {
+            background: rgb(16 185 129 / 0.1);
+            color: #047857;
+            border: 1px solid rgb(16 185 129 / 0.2);
+        }
+
+        /* Enhanced Cards and Components */
+        .card {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            padding: 1.5rem var(--card-padding);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .card-body {
+            padding: var(--card-padding);
+        }
+
+        /* Responsive grid system */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .stat-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.blue { background: var(--primary); }
+        .stat-icon.green { background: var(--success); }
+        .stat-icon.orange { background: var(--warning); }
+        .stat-icon.red { background: var(--danger); }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .stat-change {
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-change.positive {
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            color: var(--danger);
+        }
+
+        /* XP Progress Bar */
+        .xp-container {
+            background: var(--bg-primary);
+            padding: var(--card-padding);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .xp-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .level-badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            white-space: nowrap;
+        }
+
+        .xp-info {
+            text-align: right;
+        }
+
+        .xp-current {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .xp-next {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .xp-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--gray-200);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .xp-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 999px;
+            transition: width 0.5s ease;
+        }
+
+        /* Assignment Cards */
+        .assignment-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .assignment-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .assignment-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .assignment-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .assignment-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .assignment-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            white-space: nowrap;
+        }
+
+        .status-pending {
+            background: rgb(251 146 60 / 0.1);
+            color: #ea580c;
+        }
+
+        .status-completed {
+            background: rgb(34 197 94 / 0.1);
+            color: #16a34a;
+        }
+
+        .status-overdue {
+            background: rgb(239 68 68 / 0.1);
+            color: #dc2626;
+        }
+
+        .assignment-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            white-space: nowrap;
+        }
+
+        .priority-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .priority-high {
+            background: rgb(239 68 68 / 0.1);
+            color: #dc2626;
+        }
+
+        .priority-medium {
+            background: rgb(251 146 60 / 0.1);
+            color: #ea580c;
+        }
+
+        .priority-low {
+            background: rgb(34 197 94 / 0.1);
+            color: #16a34a;
+        }
+
+        .assignment-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.375rem;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        /* Practice Log */
+        .practice-form {
+            background: var(--bg-primary);
+            padding: var(--card-padding);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .mood-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .mood-option {
+            width: 3rem;
+            height: 3rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--bg-primary);
+        }
+
+        .mood-option:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .mood-option.selected {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            padding-right: 3rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 2rem;
+            height: 2rem;
+            border: none;
+            background: var(--bg-tertiary);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--gray-200);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        /* Filter Controls */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+        }
+
+        /* Weekly Overview */
+        .weekly-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .day-card {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .day-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .day-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .day-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .day-progress {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Student Management */
+        .student-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .student-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: all 0.2s ease;
+        }
+
+        .student-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .student-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .student-info h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .student-level {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .student-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .student-stat {
+            text-align: center;
+        }
+
+        .student-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .student-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        /* Reports */
+        .report-container {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .report-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .report-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .report-type {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .report-type input[type="radio"] {
+            margin: 0;
+        }
+
+        .report-type:hover {
+            border-color: var(--primary);
+        }
+
+        .report-content {
+            padding: 2rem;
+            display: none;
+        }
+
+        .report-content.active {
+            display: block;
+        }
+
+        /* Loading States */
+        .loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .spinner {
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid var(--gray-200);
+            border-top: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.3s ease;
+        }
+
+        .slide-up {
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-400);
+        }
+
+        /* Page Visibility */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Responsive Design - Mobile First Approach */
+        
+        /* Extra Small devices (portrait phones, less than 576px) */
+        @media (max-width: 575.98px) {
+            :root {
+                --content-padding: 1rem;
+                --card-padding: 1rem;
+            }
+
+            .auth-card {
+                padding: 2rem 1.5rem;
+                margin: 0.5rem;
+            }
+
+            .auth-logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .auth-logo i {
+                font-size: 2.5rem;
+            }
+
+            .page-title {
+                font-size: 1.25rem;
+            }
+
+            .top-bar {
+                padding: 0.75rem 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .weekly-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.25rem;
+            }
+
+            .day-card {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .xp-header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .xp-info {
+                text-align: center;
+            }
+
+            .assignment-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .assignment-title {
+                min-width: auto;
+            }
+
+            .assignment-meta {
+                gap: 0.5rem;
+            }
+
+            .meta-item {
+                font-size: 0.8rem;
+            }
+
+            .assignment-actions {
+                justify-content: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .filter-group {
+                justify-content: center;
+            }
+
+            .search-input {
+                min-width: auto;
+            }
+
+            .modal-content {
+                margin: 0.5rem;
+            }
+
+            .modal-header {
+                padding: 1.5rem 1rem 1rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+            .modal-title {
+                font-size: 1.25rem;
+                padding-right: 2.5rem;
+            }
+
+            .student-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .student-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+
+            .report-header {
+                padding: 1rem;
+            }
+
+            .report-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sidebar-close {
+                display: block;
+            }
+
+            .mood-selector {
+                justify-content: center;
+            }
+
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        /* Small devices (landscape phones, 576px and up) */
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            :root {
+                --content-padding: 1.5rem;
+                --card-padding: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .weekly-grid {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 0.4rem;
+            }
+
+            .day-card {
+                padding: 0.75rem;
+            }
+
+            .assignment-actions {
+                gap: 0.75rem;
+            }
+
+            .student-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .sidebar-close {
+                display: block;
+            }
+        }
+
+        /* Medium devices (tablets, 768px and up) */
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            :root {
+                --content-padding: 1.5rem;
+                --card-padding: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .weekly-grid {
+                grid-template-columns: repeat(7, 1fr);
+            }
+
+            .assignment-header {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .xp-header {
+                flex-direction: row;
+            }
+
+            .xp-info {
+                text-align: right;
+            }
+
+            .sidebar-close {
+                display: block;
+            }
+        }
+
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            .sidebar {
+                transform: translateX(0);
+                position: fixed;
+            }
+
+            .main-content {
+                margin-left: var(--sidebar-width);
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Extra large devices (large desktops, 1200px and up) */
+        @media (min-width: 1200px) {
+            .sidebar {
+                transform: translateX(0);
+                position: fixed;
+            }
+
+            .main-content {
+                margin-left: var(--sidebar-width);
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .weekly-grid {
+                grid-template-columns: repeat(7, 1fr);
+            }
+        }
+
+        /* Ultra wide screens (1400px and up) */
+        @media (min-width: 1400px) {
+            .content-wrapper {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Landscape orientation adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .auth-card {
+                padding: 1.5rem;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .sidebar {
+                overflow-y: auto;
+            }
+
+            .modal-content {
+                max-height: 95vh;
+            }
+        }
+
+        /* High DPI screens */
+        @media (min-resolution: 2dppx) {
+            .auth-logo i {
+                transform: scale(0.9);
+            }
+        }
+
+        /* Reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .sidebar,
+            .top-bar,
+            .modal,
+            .btn,
+            .notification-btn {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+            }
+
+            .card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+
+            body {
+                background: white !important;
+                color: black !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+    <!-- Login Page -->
+    <div id="login-page" class="page active">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-logo">
+                    <i class="fas fa-music"></i>
+                    <h1>CelloSphere</h1>
+                    <p>Your complete cello teaching platform</p>
+                </div>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label" for="username">Username</label>
+                        <input type="text" id="username" class="form-input" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password</label>
+                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <span class="login-text">Sign In</span>
+                        <span class="loading" style="display: none;">
+                            <span class="spinner"></span>
+                            Signing in...
+                        </span>
+                    </button>
+                </form>
+                
+                <div class="auth-footer">
+                    Don't have an account? <a href="#" onclick="showSignup()">Create one</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signup-page" class="page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-logo">
+                    <i class="fas fa-music"></i>
+                    <h1>CelloSphere</h1>
+                    <p>Join our cello teaching community</p>
+                </div>
+                
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label class="form-label" for="new-username">Username</label>
+                        <input type="text" id="new-username" class="form-input" placeholder="Choose a username" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="new-password">Password</label>
+                        <input type="password" id="new-password" class="form-input" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" class="form-input" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Create Account</button>
+                </form>
+                
+                <div class="auth-footer">
+                    Already have an account? <a href="#" onclick="showLogin()">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Student Dashboard -->
+    <div id="student-page" class="page">
+        <div class="dashboard">
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-logo">
+                        <i class="fas fa-music"></i>
+                        <h2>CelloSphere</h2>
+                    </div>
+                    <button class="sidebar-close" onclick="closeSidebar()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <nav class="sidebar-nav">
+                    <div class="nav-section">
+                        <div class="nav-section-title">Main</div>
+                        <a href="#" class="nav-link active" data-section="student-dashboard">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#" class="nav-link" data-section="student-assignments">
+                            <i class="fas fa-book"></i>
+                            <span>My Assignments</span>
+                        </a>
+                        <a href="#" class="nav-link" data-section="student-practice">
+                            <i class="fas fa-clock"></i>
+                            <span>Practice Log</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-section">
+                        <div class="nav-section-title">Progress</div>
+                        <a href="#" class="nav-link" data-section="student-progress">
+                            <i class="fas fa-chart-line"></i>
+                            <span>My Progress</span>
+                        </a>
+                        <a href="#" class="nav-link" data-section="student-grades">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Grades</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-section">
+                        <div class="nav-section-title">Resources</div>
+                        <a href="#" class="nav-link" data-section="student-resources">
+                            <i class="fas fa-folder"></i>
+                            <span>Resources</span>
+                        </a>
+                        <a href="#" class="nav-link" data-section="student-notifications">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </div>
+                </nav>
+                
+                <div class="sidebar-footer">
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sign Out
+                    </button>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <div class="top-bar">
+                    <div class="top-bar-left">
+                        <button class="menu-toggle" onclick="toggleSidebar()">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="page-title" id="student-page-title">Dashboard</h1>
+                    </div>
+                    <div class="top-bar-actions">
+                        <button class="notification-btn" onclick="showSection('student-notifications')">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="student-notification-badge" style="display: none;">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="content-wrapper">
+                    <!-- Student Dashboard Section -->
+                    <section id="student-dashboard" class="content-section active">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            Welcome back! Track your practice sessions and complete your assignments below.
+                        </div>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">Pending Assignments</div>
+                                    <div class="stat-icon blue">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value" id="pending-assignments-count">0</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    Ready to tackle!
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">This Week</div>
+                                    <div class="stat-icon green">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value" id="completed-this-week">0</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    Assignments completed
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">Practice Time</div>
+                                    <div class="stat-icon orange">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value" id="practice-minutes-week">0</div>
+                                <div class="stat-change">
+                                    Minutes this week
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">Practice Streak</div>
+                                    <div class="stat-icon red">
+                                        <i class="fas fa-fire"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value" id="practice-streak-days">0</div>
+                                <div class="stat-change">
+                                    Days in a row
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- XP Progress -->
+                        <div class="xp-container">
+                            <div class="xp-header">
+                                <div class="level-badge" id="student-level-badge">Level 1</div>
+                                <div class="xp-info">
+                                    <div class="xp-current" id="xp-display">0 / 100 XP</div>
+                                    <div class="xp-next">Next level at 100 XP</div>
+                                </div>
+                            </div>
+                            <div class="xp-bar">
+                                <div class="xp-progress" id="xp-progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Weekly Overview -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">This Week's Progress</div>
+                                <div class="card-subtitle">Your daily practice and assignment completion</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="weekly-grid" id="weekly-overview-grid">
+                                    <!-- Days will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Student Assignments Section -->
+                    <section id="student-assignments" class="content-section">
+                        <div class="filter-bar">
+                            <div class="filter-group">
+                                <button class="filter-btn active" data-filter="all">All</button>
+                                <button class="filter-btn" data-filter="pending">Pending</button>
+                                <button class="filter-btn" data-filter="completed">Completed</button>
+                                <button class="filter-btn" data-filter="overdue">Overdue</button>
+                            </div>
+                            <input type="text" class="search-input" placeholder="Search assignments..." id="assignment-search">
+                        </div>
+
+                        <div class="assignment-grid" id="student-assignments-list">
+                            <!-- Assignments will be populated by JavaScript -->
+                        </div>
+                    </section>
+
+                    <!-- Student Practice Log Section -->
+                    <section id="student-practice" class="content-section">
+                        <div class="practice-form">
+                            <h3 style="margin-bottom: 1.5rem;">Log Practice Session</h3>
+                            <form id="practice-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Duration (minutes)</label>
+                                        <input type="number" id="practice-duration" class="form-input" min="1" max="240" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">How did it go?</label>
+                                        <div class="mood-selector">
+                                            <div class="mood-option" data-mood="excellent" title="Excellent">😄</div>
+                                            <div class="mood-option" data-mood="good" title="Good">😊</div>
+                                            <div class="mood-option" data-mood="okay" title="Okay">😐</div>
+                                            <div class="mood-option" data-mood="difficult" title="Difficult">😤</div>
+                                            <div class="mood-option" data-mood="frustrated" title="Frustrated">😫</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Practice Notes (optional)</label>
+                                    <textarea id="practice-notes" class="form-input" rows="3" placeholder="What did you work on? Any breakthroughs or challenges?"></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    Log Practice Session
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Recent Practice Sessions</div>
+                                <div class="card-subtitle">Your practice history</div>
+                            </div>
+                            <div class="card-body">
+                                <div id="practice-sessions-list">
+                                    <!-- Practice sessions will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Student Progress Section -->
+                    <section id="student-progress" class="content-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Progress Overview</div>
+                                <div class="card-subtitle">Track your musical journey</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="student-progress-summary">
+                                    <!-- Progress content will be added -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Student Grades Section -->
+                    <section id="student-grades" class="content-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Grade History</div>
+                                <div class="card-subtitle">Your performance over time</div>
+                            </div>
+                            <div class="card-body">
+                                <div id="student-grades-list">
+                                    <!-- Grades will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Student Resources Section -->
+                    <section id="student-resources" class="content-section">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">Sheet Music</div>
+                                    <div class="stat-icon blue">
+                                        <i class="fas fa-music"></i>
+                                    </div>
+                                </div>
+                                <p style="margin-top: 1rem; color: var(--text-secondary);">Access your assigned pieces and practice materials</p>
+                                <button class="btn-primary" style="margin-top: 1rem;">
+                                    <i class="fas fa-folder-open"></i>
+                                    View Library
+                                </button>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">Video Lessons</div>
+                                    <div class="stat-icon green">
+                                        <i class="fas fa-video"></i>
+                                    </div>
+                                </div>
+                                <p style="margin-top: 1rem; color: var(--text-secondary);">Watch technique videos and masterclasses</p>
+                                <button class="btn-success" style="margin-top: 1rem;">
+                                    <i class="fas fa-play"></i>
+                                    Watch Videos
+                                </button>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">Practice Tools</div>
+                                    <div class="stat-icon orange">
+                                        <i class="fas fa-tools"></i>
+                                    </div>
+                                </div>
+                                <p style="margin-top: 1rem; color: var(--text-secondary);">Metronome, tuner, and other practice aids</p>
+                                <button class="btn" style="margin-top: 1rem; background: var(--warning); color: white;">
+                                    <i class="fas fa-tools"></i>
+                                    Open Tools
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Student Notifications Section -->
+                    <section id="student-notifications" class="content-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Notifications</div>
+                                <div class="card-subtitle">Stay updated with your progress</div>
+                            </div>
+                            <div class="card-body">
+                                <div id="student-notifications-list">
+                                    <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No notifications yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Teacher Dashboard -->
+    <div id="teacher-page" class="page">
+        <div class="dashboard">
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-logo">
+                        <i class="fas fa-music"></i>
+                        <h2>CelloSphere</h2>
+                    </div>
+                    <button class="sidebar-close" onclick="closeSidebar()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <nav class="sidebar-nav">
+                    <div class="nav-section">
+                        <div class="nav-section-title">Main</div>
+                        <a href="#" class="nav-link active" data-section="teacher-dashboard">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#" class="nav-link" data-section="teacher-assignments">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Assignments</span>
+                        </a>
+                        <a href="#" class="nav-link" data-section="teacher-students">
+                            <i class="fas fa-users"></i>
+                            <span>Students</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-section">
+                        <div class="nav-section-title">Tools</div>
+                        <a href="#" class="nav-link" data-section="create-assignment">
+                            <i class="fas fa-plus"></i>
+                            <span>Create Assignment</span>
+                        </a>
+                        <a href="#" class="nav-link" data-section="teacher-reports">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports</span>
+                        </a>
+                        <a href="#" class="nav-link" data-section="teacher-notifications">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </div>
+                </nav>
+                
+                <div class="sidebar-footer">
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sign Out
+                    </button>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <div class="top-bar">
+                    <div class="top-bar-left">
+                        <button class="menu-toggle" onclick="toggleSidebar()">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="page-title" id="teacher-page-title">Teacher Dashboard</h1>
+                    </div>
+                    <div class="top-bar-actions">
+                        <button class="notification-btn" onclick="showSection('teacher-notifications')">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="teacher-notification-badge" style="display: none;">0</span>
+                        </button>
+                        <button class="notification-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="content-wrapper">
+                    <!-- Teacher Dashboard Section -->
+                    <section id="teacher-dashboard" class="content-section active">
+                        <div class="alert alert-info">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            Welcome to your teaching dashboard! Manage students and track their progress.
+                        </div>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">Total Students</div>
+                                    <div class="stat-icon blue">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value" id="total-students-count">0</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    Active learners
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">Active Assignments</div>
+                                    <div class="stat-icon green">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value" id="active-assignments-count">0</div>
+                                <div class="stat-change">
+                                    Currently assigned
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">Pending Work</div>
+                                    <div class="stat-icon orange">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value" id="pending-work-count">0</div>
+                                <div class="stat-change">
+                                    Awaiting completion
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-title">This Week</div>
+                                    <div class="stat-icon red">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value" id="completed-week-count">0</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    Completed
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Recent Activity</div>
+                                <div class="card-subtitle">Latest student progress and submissions</div>
+                            </div>
+                            <div class="card-body">
+                                <div id="recent-activity-list">
+                                    <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No recent activity</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Create Assignment Section -->
+                    <section id="create-assignment" class="content-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Create New Assignment</div>
+                                <div class="card-subtitle">Assign practice material to your students</div>
+                            </div>
+                            <div class="card-body">
+                                <form id="create-assignment-form">
+                                    <div class="form-group">
+                                        <label class="form-label">Assignment Title</label>
+                                        <input type="text" id="assignment-title" class="form-input" placeholder="e.g., Bach Cello Suite No. 1 - Prelude" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Instructions</label>
+                                        <textarea id="assignment-instructions" class="form-input" rows="4" placeholder="Detailed practice instructions..." required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Practice Time (minutes)</label>
+                                            <input type="number" id="practice-time" class="form-input" min="5" max="120">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Due Date</label>
+                                            <input type="date" id="due-date" class="form-input" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Priority Level</label>
+                                        <div class="filter-group">
+                                            <button type="button" class="filter-btn priority-btn" data-priority="low">Low</button>
+                                            <button type="button" class="filter-btn priority-btn active" data-priority="medium">Medium</button>
+                                            <button type="button" class="filter-btn priority-btn" data-priority="high">High</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Assign To</label>
+                                        <select id="assign-to" class="form-input" multiple>
+                                            <option value="all">All Students</option>
+                                        </select>
+                                        <small style="color: var(--text-secondary);">Hold Ctrl/Cmd to select multiple students</small>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn-primary">
+                                        <i class="fas fa-plus"></i>
+                                        Create Assignment
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Teacher Assignments Section -->
+                    <section id="teacher-assignments" class="content-section">
+                        <div class="filter-bar">
+                            <div class="filter-group">
+                                <button class="filter-btn active" data-filter="all">All</button>
+                                <button class="filter-btn" data-filter="pending">Pending</button>
+                                <button class="filter-btn" data-filter="completed">Completed</button>
+                                <button class="filter-btn" data-filter="overdue">Overdue</button>
+                            </div>
+                            <input type="text" class="search-input" placeholder="Search assignments...">
+                        </div>
+
+                        <div class="assignment-grid" id="teacher-assignments-list">
+                            <!-- Assignments will be populated by JavaScript -->
+                        </div>
+                    </section>
+
+                    <!-- Teacher Students Section -->
+                    <section id="teacher-students" class="content-section">
+                        <div class="student-grid" id="teacher-students-list">
+                            <!-- Students will be populated by JavaScript -->
+                        </div>
+                    </section>
+
+                    <!-- Teacher Reports Section -->
+                    <section id="teacher-reports" class="content-section">
+                        <div class="report-container">
+                            <div class="report-header">
+                                <h3>Generate Reports</h3>
+                                <div class="report-controls">
+                                    <div class="report-type">
+                                        <input type="radio" name="reportType" value="student-progress" checked>
+                                        <span>Student Progress</span>
+                                    </div>
+                                    <div class="report-type">
+                                        <input type="radio" name="reportType" value="assignment-completion">
+                                        <span>Assignment Completion</span>
+                                    </div>
+                                    <div class="report-type">
+                                        <input type="radio" name="reportType" value="practice-time">
+                                        <span>Practice Time Analysis</span>
+                                    </div>
+                                    <button class="btn-primary" onclick="generateReport()">
+                                        <i class="fas fa-chart-bar"></i>
+                                        Generate Report
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="report-content" id="report-content">
+                                <!-- Report content will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Teacher Notifications Section -->
+                    <section id="teacher-notifications" class="content-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Notifications</div>
+                                <div class="card-subtitle">Student activity and updates</div>
+                            </div>
+                            <div class="card-body">
+                                <div id="teacher-notifications-list">
+                                    <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No notifications yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Assignment Details Modal -->
+    <div id="assignment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-assignment-title">Assignment Details</h2>
+                <button class="modal-close" onclick="closeModal('assignment-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-assignment-content">
+                    <!-- Assignment details will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grade Student Modal -->
+    <div id="grade-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Grade Student</h2>
+                <button class="modal-close" onclick="closeModal('grade-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="grade-form">
+                    <div class="form-group">
+                        <label class="form-label">Student</label>
+                        <input type="text" id="grade-student-name" class="form-input" readonly>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Week Of</label>
+                            <input type="date" id="grade-week" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Grade</label>
+                            <select id="grade-value" class="form-input" required>
+                                <option value="">Select Grade</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="B-">B-</option>
+                                <option value="C+">C+</option>
+                                <option value="C">C</option>
+                                <option value="C-">C-</option>
+                                <option value="D">D</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i>
+                        Save Grade
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // In-memory data storage (replaces localStorage)
+        let appData = {
+            users: [
+                {
+                    username: "demo_student",
+                    password: "password123",
+                    isTeacher: false,
+                    xp: 150,
+                    level: 2,
+                    practiceSessions: [
+                        {
+                            id: 1,
+                            date: new Date().toISOString(),
+                            duration: 30,
+                            mood: "good",
+                            notes: "Worked on scales and bowing technique"
+                        }
+                    ],
+                    grades: [
+                        {
+                            week: "2024-06-03",
+                            grade: "A-",
+                            date: new Date().toISOString()
+                        }
+                    ]
+                }
+            ],
+            assignments: [
+                {
+                    id: 1,
+                    title: "Bach Cello Suite No. 1 - Prelude",
+                    instructions: "Focus on consistent bowing and intonation. Practice slowly with metronome at 60 BPM.",
+                    practiceTime: 30,
+                    dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    assignedDate: new Date().toISOString().split('T')[0],
+                    assignedTo: ["all"],
+                    completedBy: [],
+                    priority: "medium"
+                }
+            ],
+            teacherNotifications: [],
+            studentNotifications: []
+        };
+
+        // Global variables
+        let currentUser = null;
+        let isTeacher = false;
+        let selectedMood = '';
+        let selectedPriority = 'medium';
+
+        // Constants
+        const TEACHER_USERNAME = 'Jonathan Koh';
+        const TEACHER_PASSWORD = 'CelloIsFun123';
+        const XP_PER_ASSIGNMENT = 50;
+        const XP_PER_PRACTICE = 25;
+        const LEVEL_THRESHOLDS = [0, 100, 250, 500, 800, 1200, 1700, 2300, 3000, 3800];
+
+        // Utility Functions
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString();
+        }
+
+        function formatTime(minutes) {
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+        }
+
+        function getDaysUntilDue(dueDate) {
+            const today = new Date();
+            const due = new Date(dueDate);
+            const diffTime = due - today;
+            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
+
+        function getAssignmentStatus(assignment) {
+            const daysUntil = getDaysUntilDue(assignment.dueDate);
+            const isCompleted = assignment.completedBy && assignment.completedBy.includes(currentUser?.username);
+            
+            if (isCompleted) return 'completed';
+            if (daysUntil < 0) return 'overdue';
+            if (daysUntil <= 2) return 'due-soon';
+            return 'pending';
+        }
+
+        function calculateLevel(xp) {
+            for (let i = LEVEL_THRESHOLDS.length - 1; i >= 0; i--) {
+                if (xp >= LEVEL_THRESHOLDS[i]) {
+                    return i + 1;
+                }
+            }
+            return 1;
+        }
+
+        function getXpForNextLevel(level) {
+            return level < LEVEL_THRESHOLDS.length ? LEVEL_THRESHOLDS[level] : LEVEL_THRESHOLDS[LEVEL_THRESHOLDS.length - 1] + 500;
+        }
+
+        function getMoodEmoji(mood) {
+            const moodEmojis = {
+                'excellent': '😄',
+                'good': '😊',
+                'okay': '😐',
+                'difficult': '😤',
+                'frustrated': '😫'
+            };
+            return moodEmojis[mood] || '😐';
+        }
+
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function showLogin() {
+            showPage('login-page');
+        }
+
+        function showSignup() {
+            showPage('signup-page');
+        }
+
+        function showSection(sectionId) {
+            // Update content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${sectionId}"]`)?.classList.add('active');
+
+            // Update page title
+            const section = document.getElementById(sectionId);
+            const titleElement = isTeacher ? 
+                document.getElementById('teacher-page-title') : 
+                document.getElementById('student-page-title');
+            
+            if (section && titleElement) {
+                const sectionTitle = section.querySelector('h3, .card-title');
+                if (sectionTitle) {
+                    titleElement.textContent = sectionTitle.textContent;
+                }
+            }
+
+            // Load section-specific data
+            loadSectionData(sectionId);
+        }
+
+        function loadSectionData(sectionId) {
+            switch (sectionId) {
+                case 'student-dashboard':
+                    updateStudentDashboard();
+                    break;
+                case 'student-assignments':
+                    renderStudentAssignments();
+                    break;
+                case 'student-practice':
+                    renderPracticeSessions();
+                    break;
+                case 'teacher-dashboard':
+                    updateTeacherDashboard();
+                    break;
+                case 'teacher-assignments':
+                    renderTeacherAssignments();
+                    break;
+                case 'teacher-students':
+                    renderStudents();
+                    break;
+                case 'create-assignment':
+                    populateStudentDropdown();
+                    break;
+            }
+        }
+
+        // Authentication
+        function login(username, password) {
+            // Teacher login
+            if (username === TEACHER_USERNAME && password === TEACHER_PASSWORD) {
+                currentUser = { username: TEACHER_USERNAME, isTeacher: true };
+                isTeacher = true;
+                showPage('teacher-page');
+                setupTeacherDashboard();
+                return true;
+            }
+
+            // Student login
+            const user = appData.users.find(u => u.username === username && u.password === password && !u.isTeacher);
+            if (user) {
+                currentUser = user;
+                isTeacher = false;
+                showPage('student-page');
+                setupStudentDashboard();
+                return true;
+            }
+
+            return false;
+        }
+
+        function signup(username, password, confirmPassword) {
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return false;
+            }
+
+            if (username.toLowerCase() === TEACHER_USERNAME.toLowerCase()) {
+                alert('Username is reserved.');
+                return false;
+            }
+
+            if (appData.users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
+                alert('Username already exists.');
+                return false;
+            }
+
+            const newUser = {
+                username,
+                password,
+                isTeacher: false,
+                xp: 0,
+                level: 1,
+                practiceSessions: [],
+                grades: []
+            };
+
+            appData.users.push(newUser);
+            alert('Account created successfully!');
+            showLogin();
+            return true;
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to sign out?')) {
+                currentUser = null;
+                isTeacher = false;
+                showLogin();
+            }
+        }
+
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            
+            // Prevent body scroll when sidebar is open on mobile
+            if (sidebar.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Student Dashboard Functions
+        function setupStudentDashboard() {
+            showSection('student-dashboard');
+            updateStudentDashboard();
+        }
+
+        function updateStudentDashboard() {
+            if (!currentUser || isTeacher) return;
+
+            // Update stats
+            const userAssignments = appData.assignments.filter(a => 
+                a.assignedTo.includes('all') || a.assignedTo.includes(currentUser.username)
+            );
+
+            const pendingAssignments = userAssignments.filter(a => 
+                !a.completedBy || !a.completedBy.includes(currentUser.username)
+            ).length;
+
+            const thisWeek = new Date();
+            thisWeek.setDate(thisWeek.getDate() - 7);
+            const completedThisWeek = userAssignments.filter(a => 
+                a.completedBy && a.completedBy.includes(currentUser.username) &&
+                new Date(a.completionDate || a.assignedDate) > thisWeek
+            ).length;
+
+            const practiceMinutesWeek = (currentUser.practiceSessions || [])
+                .filter(s => new Date(s.date) > thisWeek)
+                .reduce((total, session) => total + session.duration, 0);
+
+            const practiceStreak = calculatePracticeStreak();
+
+            // Update stat cards
+            document.getElementById('pending-assignments-count').textContent = pendingAssignments;
+            document.getElementById('completed-this-week').textContent = completedThisWeek;
+            document.getElementById('practice-minutes-week').textContent = practiceMinutesWeek;
+            document.getElementById('practice-streak-days').textContent = practiceStreak;
+
+            // Update XP display
+            updateXpDisplay();
+
+            // Update weekly overview
+            updateWeeklyOverview();
+        }
+
+        function updateXpDisplay() {
+            if (!currentUser || isTeacher) return;
+
+            const currentXp = currentUser.xp || 0;
+            const currentLevel = calculateLevel(currentXp);
+            const xpForCurrentLevel = currentLevel > 1 ? LEVEL_THRESHOLDS[currentLevel - 1] : 0;
+            const xpForNextLevel = getXpForNextLevel(currentLevel);
+            
+            const progressXp = currentXp - xpForCurrentLevel;
+            const levelXpMax = xpForNextLevel - xpForCurrentLevel;
+            const percentage = Math.min((progressXp / levelXpMax) * 100, 100);
+
+            document.getElementById('student-level-badge').textContent = `Level ${currentLevel}`;
+            document.getElementById('xp-display').textContent = `${currentXp} / ${xpForNextLevel} XP`;
+            document.getElementById('xp-progress-bar').style.width = `${percentage}%`;
+
+            // Update user level
+            currentUser.level = currentLevel;
+        }
+
+        function calculatePracticeStreak() {
+            if (!currentUser.practiceSessions || currentUser.practiceSessions.length === 0) return 0;
+
+            const sessions = [...currentUser.practiceSessions].sort((a, b) => new Date(b.date) - new Date(a.date));
+            let streak = 0;
+            let currentDate = new Date();
+
+            for (let i = 0; i < 30; i++) {
+                const dateStr = currentDate.toDateString();
+                const hasSession = sessions.some(s => new Date(s.date).toDateString() === dateStr);
+                
+                if (hasSession) {
+                    streak++;
+                } else if (i > 0) { // Don't break on first day if no session today
+                    break;
+                }
+                
+                currentDate.setDate(currentDate.getDate() - 1);
+            }
+
+            return streak;
+        }
+
+        function updateWeeklyOverview() {
+            const grid = document.getElementById('weekly-overview-grid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+            
+            const today = new Date();
+            const startOfWeek = new Date(today);
+            startOfWeek.setDate(today.getDate() - today.getDay());
+
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+            for (let i = 0; i < 7; i++) {
+                const currentDate = new Date(startOfWeek);
+                currentDate.setDate(startOfWeek.getDate() + i);
+                
+                const dayCard = document.createElement('div');
+                dayCard.className = 'day-card';
+
+                const hasPractice = currentUser.practiceSessions?.some(s => 
+                    new Date(s.date).toDateString() === currentDate.toDateString()
+                );
+
+                const assignmentsCompleted = appData.assignments.filter(a => 
+                    a.completedBy && a.completedBy.includes(currentUser.username) &&
+                    new Date(a.completionDate || a.assignedDate).toDateString() === currentDate.toDateString()
+                ).length;
+
+                dayCard.innerHTML = `
+                    <div class="day-name">${days[i]}</div>
+                    <div class="day-date">${currentDate.getDate()}</div>
+                    <div class="day-progress">${hasPractice ? '✓' : '○'} ${assignmentsCompleted}</div>
+                `;
+
+                if (hasPractice) {
+                    dayCard.style.borderColor = 'var(--success)';
+                }
+
+                grid.appendChild(dayCard);
+            }
+        }
+
+        function renderStudentAssignments() {
+            const container = document.getElementById('student-assignments-list');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            let assignments = appData.assignments.filter(a => 
+                a.assignedTo.includes('all') || a.assignedTo.includes(currentUser.username)
+            );
+
+            // Apply filters
+            const activeFilter = document.querySelector('#student-assignments .filter-btn.active')?.dataset.filter || 'all';
+            const searchTerm = document.getElementById('assignment-search')?.value.toLowerCase() || '';
+
+            if (activeFilter !== 'all') {
+                assignments = assignments.filter(a => getAssignmentStatus(a) === activeFilter);
+            }
+
+            if (searchTerm) {
+                assignments = assignments.filter(a => 
+                    a.title.toLowerCase().includes(searchTerm) ||
+                    a.instructions.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            if (assignments.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No assignments found</p>';
+                return;
+            }
+
+            assignments.forEach(assignment => {
+                const status = getAssignmentStatus(assignment);
+                const daysUntil = getDaysUntilDue(assignment.dueDate);
+                const isCompleted = assignment.completedBy && assignment.completedBy.includes(currentUser.username);
+
+                const card = document.createElement('div');
+                card.className = 'assignment-card';
+                card.innerHTML = `
+                    <div class="assignment-header">
+                        <h3 class="assignment-title">${assignment.title}</h3>
+                        <span class="assignment-status status-${status}">
+                            ${status.replace('-', ' ')}
+                        </span>
+                    </div>
+                    <div class="assignment-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            Due ${formatDate(assignment.dueDate)}
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            ${daysUntil > 0 ? `${daysUntil} days left` : daysUntil === 0 ? 'Due today' : `${Math.abs(daysUntil)} days overdue`}
+                        </div>
+                        ${assignment.practiceTime ? `
+                            <div class="meta-item">
+                                <i class="fas fa-music"></i>
+                                ${assignment.practiceTime} min practice
+                            </div>
+                        ` : ''}
+                    </div>
+                    <p style="color: var(--text-secondary); margin: 1rem 0;">${assignment.instructions}</p>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span class="priority-badge priority-${assignment.priority}">${assignment.priority} priority</span>
+                        <div class="assignment-actions">
+                            <button class="btn btn-outline" onclick="viewAssignment(${assignment.id})">
+                                <i class="fas fa-eye"></i>
+                                View Details
+                            </button>
+                            ${!isCompleted ? `
+                                <button class="btn btn-success" onclick="completeAssignment(${assignment.id})">
+                                    <i class="fas fa-check"></i>
+                                    Complete
+                                </button>
+                            ` : `
+                                <span style="color: var(--success); font-weight: 600;">
+                                    <i class="fas fa-check-circle"></i>
+                                    Completed
+                                </span>
+                            `}
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function renderPracticeSessions() {
+            const container = document.getElementById('practice-sessions-list');
+            if (!container) return;
+
+            const sessions = (currentUser.practiceSessions || [])
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 10);
+
+            if (sessions.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No practice sessions logged yet</p>';
+                return;
+            }
+
+            container.innerHTML = sessions.map(session => {
+                const mood = getMoodEmoji(session.mood);
+                return `
+                    <div class="assignment-card" style="margin-bottom: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-size: 2rem;">${mood}</span>
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0 0 0.5rem 0;">Practice Session - ${formatTime(session.duration)}</h4>
+                                <p style="color: var(--text-secondary); margin: 0;">${formatDate(session.date)}</p>
+                                ${session.notes ? `<p style="margin: 0.5rem 0 0 0; font-style: italic;">"${session.notes}"</p>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function logPracticeSession(duration, mood, notes) {
+            if (!currentUser || isTeacher) return;
+
+            const session = {
+                id: Date.now(),
+                date: new Date().toISOString(),
+                duration: parseInt(duration),
+                mood: mood,
+                notes: notes.trim()
+            };
+
+            if (!currentUser.practiceSessions) {
+                currentUser.practiceSessions = [];
+            }
+
+            currentUser.practiceSessions.push(session);
+
+            // Add XP
+            currentUser.xp = (currentUser.xp || 0) + XP_PER_PRACTICE;
+
+            // Add notification
+            appData.teacherNotifications.push({
+                id: Date.now(),
+                type: 'practice_logged',
+                studentName: currentUser.username,
+                duration: duration,
+                mood: mood,
+                date: new Date().toISOString().split('T')[0],
+                read: false
+            });
+
+            showNotification(`Practice session logged! +${XP_PER_PRACTICE} XP earned.`, 'success');
+            updateStudentDashboard();
+            renderPracticeSessions();
+        }
+
+        // Teacher Dashboard Functions
+        function setupTeacherDashboard() {
+            showSection('teacher-dashboard');
+            updateTeacherDashboard();
+        }
+
+        function updateTeacherDashboard() {
+            const students = appData.users.filter(u => !u.isTeacher);
+            const totalStudents = students.length;
+            const activeAssignments = appData.assignments.length;
+
+            let pendingWork = 0;
+            appData.assignments.forEach(assignment => {
+                const assignedCount = assignment.assignedTo.includes('all') ? totalStudents : assignment.assignedTo.length;
+                const completedCount = assignment.completedBy ? assignment.completedBy.length : 0;
+                pendingWork += assignedCount - completedCount;
+            });
+
+            const thisWeek = new Date();
+            thisWeek.setDate(thisWeek.getDate() - 7);
+            const completedThisWeek = appData.assignments.reduce((count, assignment) => {
+                return count + (assignment.completedBy || []).filter(username => {
+                    const completionDate = new Date(assignment.completionDate || assignment.assignedDate);
+                    return completionDate > thisWeek;
+                }).length;
+            }, 0);
+
+            document.getElementById('total-students-count').textContent = totalStudents;
+            document.getElementById('active-assignments-count').textContent = activeAssignments;
+            document.getElementById('pending-work-count').textContent = pendingWork;
+            document.getElementById('completed-week-count').textContent = completedThisWeek;
+
+            updateRecentActivity();
+        }
+
+        function updateRecentActivity() {
+            const container = document.getElementById('recent-activity-list');
+            if (!container) return;
+
+            const notifications = appData.teacherNotifications
+                .sort((a, b) => b.id - a.id)
+                .slice(0, 5);
+
+            if (notifications.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No recent activity</p>';
+                return;
+            }
+
+            container.innerHTML = notifications.map(notification => {
+                if (notification.type === 'assignment_complete') {
+                    return `
+                        <div style="padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
+                            <span style="color: var(--success);">✓</span>
+                            <strong>${notification.studentName}</strong> completed 
+                            <em>"${notification.assignmentTitle}"</em>
+                        </div>
+                    `;
+                } else if (notification.type === 'practice_logged') {
+                    return `
+                        <div style="padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
+                            <span style="color: var(--primary);">🎵</span>
+                            <strong>${notification.studentName}</strong> logged 
+                            ${notification.duration} min practice ${getMoodEmoji(notification.mood)}
+                        </div>
+                    `;
+                }
+                return '';
+            }).join('');
+        }
+
+        function populateStudentDropdown() {
+            const select = document.getElementById('assign-to');
+            if (!select) return;
+
+            select.innerHTML = '<option value="all">All Students</option>';
+            
+            const students = appData.users.filter(u => !u.isTeacher);
+            students.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.username;
+                option.textContent = student.username;
+                select.appendChild(option);
+            });
+        }
+
+        function createAssignment(formData) {
+            const newAssignment = {
+                id: Date.now(),
+                title: formData.title,
+                instructions: formData.instructions,
+                practiceTime: formData.practiceTime ? parseInt(formData.practiceTime) : null,
+                dueDate: formData.dueDate,
+                assignedDate: new Date().toISOString().split('T')[0],
+                assignedTo: formData.assignedTo,
+                completedBy: [],
+                priority: selectedPriority
+            };
+
+            appData.assignments.push(newAssignment);
+
+            // Send notifications to students
+            const students = appData.users.filter(u => !u.isTeacher);
+            if (formData.assignedTo.includes('all')) {
+                students.forEach(student => {
+                    addStudentNotification(
+                        student.username,
+                        `New assignment: "${formData.title}" - Due: ${formatDate(formData.dueDate)}`
+                    );
+                });
+            } else {
+                formData.assignedTo.forEach(studentUsername => {
+                    addStudentNotification(
+                        studentUsername,
+                        `New assignment: "${formData.title}" - Due: ${formatDate(formData.dueDate)}`
+                    );
+                });
+            }
+
+            showNotification('Assignment created successfully!', 'success');
+            return true;
+        }
+
+        function renderTeacherAssignments() {
+            const container = document.getElementById('teacher-assignments-list');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            if (appData.assignments.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No assignments created yet</p>';
+                return;
+            }
+
+            appData.assignments.forEach(assignment => {
+                const students = appData.users.filter(u => !u.isTeacher);
+                const totalAssigned = assignment.assignedTo.includes('all') ? students.length : assignment.assignedTo.length;
+                const completed = assignment.completedBy ? assignment.completedBy.length : 0;
+                const completionRate = totalAssigned > 0 ? Math.round((completed / totalAssigned) * 100) : 0;
+
+                const card = document.createElement('div');
+                card.className = 'assignment-card';
+                card.innerHTML = `
+                    <div class="assignment-header">
+                        <h3 class="assignment-title">${assignment.title}</h3>
+                        <span class="assignment-status status-${completed === totalAssigned ? 'completed' : 'pending'}">
+                            ${completed === totalAssigned ? 'Completed' : 'Active'}
+                        </span>
+                    </div>
+                    <div class="assignment-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            Due ${formatDate(assignment.dueDate)}
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            ${assignment.assignedTo.includes('all') ? 'All Students' : assignment.assignedTo.join(', ')}
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-chart-pie"></i>
+                            ${completed}/${totalAssigned} completed (${completionRate}%)
+                        </div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin: 1rem 0;">${assignment.instructions}</p>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span class="priority-badge priority-${assignment.priority}">${assignment.priority} priority</span>
+                        <div class="assignment-actions">
+                            <button class="btn btn-outline" onclick="editAssignment(${assignment.id})">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </button>
+                            <button class="btn btn-danger" onclick="deleteAssignment(${assignment.id})">
+                                <i class="fas fa-trash"></i>
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function deleteAssignment(assignmentId) {
+            if (confirm('Are you sure you want to delete this assignment?')) {
+                appData.assignments = appData.assignments.filter(a => a.id !== assignmentId);
+                renderTeacherAssignments();
+                updateTeacherDashboard();
+            }
+        }
+
+        function editAssignment(assignmentId) {
+            const assignment = appData.assignments.find(a => a.id === assignmentId);
+            if (assignment) {
+                alert(`Editing: ${assignment.title}\n\nThis feature will be implemented in a future update.`);
+            }
+        }
+
+        // Assignment Functions
+        function viewAssignment(assignmentId) {
+            const assignment = appData.assignments.find(a => a.id === assignmentId);
+            if (!assignment) return;
+
+            const modal = document.getElementById('assignment-modal');
+            const title = document.getElementById('modal-assignment-title');
+            const content = document.getElementById('modal-assignment-content');
+
+            title.textContent = assignment.title;
+
+            const isCompleted = assignment.completedBy && assignment.completedBy.includes(currentUser.username);
+            const status = getAssignmentStatus(assignment);
+            const daysUntil = getDaysUntilDue(assignment.dueDate);
+
+            content.innerHTML = `
+                <div class="assignment-meta" style="margin-bottom: 1.5rem;">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <strong>Due:</strong> ${formatDate(assignment.dueDate)}
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <strong>Time left:</strong> ${daysUntil > 0 ? `${daysUntil} days` : daysUntil === 0 ? 'Due today' : `${Math.abs(daysUntil)} days overdue`}
+                    </div>
+                    ${assignment.practiceTime ? `
+                        <div class="meta-item">
+                            <i class="fas fa-music"></i>
+                            <strong>Practice time:</strong> ${assignment.practiceTime} minutes
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <h4>Instructions:</h4>
+                    <p style="background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-md); margin-top: 0.5rem;">
+                        ${assignment.instructions}
+                    </p>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span class="priority-badge priority-${assignment.priority}">${assignment.priority} priority</span>
+                    ${!isCompleted && !isTeacher ? `
+                        <button class="btn btn-success" onclick="completeAssignment(${assignment.id}); closeModal('assignment-modal');">
+                            <i class="fas fa-check"></i>
+                            Mark as Complete
+                        </button>
+                    ` : isCompleted ? `
+                        <span style="color: var(--success); font-weight: 600;">
+                            <i class="fas fa-check-circle"></i>
+                            Completed
+                        </span>
+                    ` : ''}
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        function completeAssignment(assignmentId) {
+            if (isTeacher) return;
+
+            const assignment = appData.assignments.find(a => a.id === assignmentId);
+            if (!assignment) return;
+
+            if (!assignment.completedBy) {
+                assignment.completedBy = [];
+            }
+
+            if (!assignment.completedBy.includes(currentUser.username)) {
+                assignment.completedBy.push(currentUser.username);
+                assignment.completionDate = new Date().toISOString().split('T')[0];
+
+                // Add XP
+                currentUser.xp = (currentUser.xp || 0) + XP_PER_ASSIGNMENT;
+                
+                // Add notification
+                appData.teacherNotifications.push({
+                    id: Date.now(),
+                    type: 'assignment_complete',
+                    studentName: currentUser.username,
+                    assignmentTitle: assignment.title,
+                    completionDate: assignment.completionDate,
+                    read: false
+                });
+
+                showNotification(`Assignment completed! +${XP_PER_ASSIGNMENT} XP earned.`, 'success');
+                updateStudentDashboard();
+                renderStudentAssignments();
+            }
+        }
+
+        // Student Management and Grading
+        function renderStudents() {
+            const container = document.getElementById('teacher-students-list');
+            if (!container) return;
+
+            const students = appData.users.filter(u => !u.isTeacher);
+            
+            if (students.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No students registered yet</p>';
+                return;
+            }
+
+            container.innerHTML = students.map(student => {
+                const practiceCount = (student.practiceSessions || []).length;
+                const completedAssignments = appData.assignments.filter(a => 
+                    a.completedBy && a.completedBy.includes(student.username)
+                ).length;
+
+                return `
+                    <div class="student-card">
+                        <div class="student-header">
+                            <div class="student-info">
+                                <h3 onclick="gradeStudent('${student.username}')" style="cursor: pointer;">${student.username}</h3>
+                                <div class="student-level">Level ${student.level || 1} • ${student.xp || 0} XP</div>
+                            </div>
+                            <div class="assignment-actions">
+                                <button class="btn btn-primary" onclick="gradeStudent('${student.username}')">
+                                    <i class="fas fa-star"></i>
+                                    Grade
+                                </button>
+                                <button class="btn btn-danger" onclick="deleteStudent('${student.username}')">
+                                    <i class="fas fa-trash"></i>
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                        <div class="student-stats">
+                            <div class="student-stat">
+                                <div class="student-stat-value">${completedAssignments}</div>
+                                <div class="student-stat-label">Assignments</div>
+                            </div>
+                            <div class="student-stat">
+                                <div class="student-stat-value">${practiceCount}</div>
+                                <div class="student-stat-label">Practice Sessions</div>
+                            </div>
+                            <div class="student-stat">
+                                <div class="student-stat-value">${(student.grades || []).length}</div>
+                                <div class="student-stat-label">Grades</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function gradeStudent(studentUsername) {
+            const modal = document.getElementById('grade-modal');
+            const studentNameField = document.getElementById('grade-student-name');
+            const weekField = document.getElementById('grade-week');
+
+            studentNameField.value = studentUsername;
+            
+            // Set default week to current Monday
+            const today = new Date();
+            const dayOfWeek = today.getDay();
+            const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+            const monday = new Date(today.setDate(diff));
+            weekField.value = monday.toISOString().split('T')[0];
+
+            modal.classList.add('active');
+        }
+
+        function saveGrade(studentUsername, week, grade) {
+            const student = appData.users.find(u => u.username === studentUsername && !u.isTeacher);
+            if (!student) return;
+
+            if (!student.grades) {
+                student.grades = [];
+            }
+
+            student.grades.push({
+                week: week,
+                grade: grade,
+                date: new Date().toISOString()
+            });
+
+            addStudentNotification(
+                studentUsername,
+                `New grade assigned: ${grade} for week of ${formatDate(week)}`
+            );
+
+            showNotification(`Grade '${grade}' saved for ${studentUsername}!`, 'success');
+            closeModal('grade-modal');
+            renderStudents();
+        }
+
+        function deleteStudent(studentUsername) {
+            if (confirm(`Are you sure you want to delete student "${studentUsername}"?`)) {
+                // Remove user
+                appData.users = appData.users.filter(u => u.username !== studentUsername);
+                
+                // Update assignments
+                appData.assignments.forEach(assignment => {
+                    assignment.assignedTo = assignment.assignedTo.filter(name => name !== studentUsername);
+                    if (assignment.completedBy) {
+                        assignment.completedBy = assignment.completedBy.filter(name => name !== studentUsername);
+                    }
+                });
+
+                // Remove notifications
+                appData.teacherNotifications = appData.teacherNotifications.filter(n => n.studentName !== studentUsername);
+                appData.studentNotifications = appData.studentNotifications.filter(n => n.studentUsername !== studentUsername);
+
+                renderStudents();
+                updateTeacherDashboard();
+                showNotification(`Student ${studentUsername} deleted.`, 'success');
+            }
+        }
+
+        // Report Functions
+        function generateReport() {
+            const reportType = document.querySelector('input[name="reportType"]:checked').value;
+            const reportContent = document.getElementById('report-content');
+
+            let content = '';
+
+            switch (reportType) {
+                case 'student-progress':
+                    content = generateStudentProgressReport();
+                    break;
+                case 'assignment-completion':
+                    content = generateAssignmentCompletionReport();
+                    break;
+                case 'practice-time':
+                    content = generatePracticeTimeReport();
+                    break;
+            }
+
+            reportContent.innerHTML = content;
+            reportContent.classList.add('active');
+        }
+
+        function generateStudentProgressReport() {
+            const students = appData.users.filter(u => !u.isTeacher);
+            
+            let report = '<h4>Student Progress Summary</h4>';
+            
+            students.forEach(student => {
+                const practiceCount = (student.practiceSessions || []).length;
+                const totalPracticeTime = (student.practiceSessions || [])
+                    .reduce((total, session) => total + session.duration, 0);
+                const avgPracticeTime = practiceCount > 0 ? Math.round(totalPracticeTime / practiceCount) : 0;
+                
+                report += `
+                    <div style="margin-bottom: 1rem; padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                        <h5>${student.username}</h5>
+                        <p><strong>Level:</strong> ${student.level || 1} | <strong>XP:</strong> ${student.xp || 0}</p>
+                        <p><strong>Practice Sessions:</strong> ${practiceCount} | <strong>Total Time:</strong> ${formatTime(totalPracticeTime)}</p>
+                        <p><strong>Average Session:</strong> ${formatTime(avgPracticeTime)}</p>
+                        <p><strong>Grades:</strong> ${(student.grades || []).length}</p>
+                    </div>
+                `;
+            });
+            
+            return report;
+        }
+
+        function generateAssignmentCompletionReport() {
+            const students = appData.users.filter(u => !u.isTeacher);
+            const studentCount = students.length;
+            
+            let report = '<h4>Assignment Completion Report</h4>';
+            
+            appData.assignments.forEach(assignment => {
+                const totalAssigned = assignment.assignedTo.includes('all') ? studentCount : assignment.assignedTo.length;
+                const completed = assignment.completedBy ? assignment.completedBy.length : 0;
+                const completionRate = totalAssigned > 0 ? Math.round((completed / totalAssigned) * 100) : 0;
+                
+                report += `
+                    <div style="margin-bottom: 1rem; padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                        <h5>${assignment.title}</h5>
+                        <p><strong>Due:</strong> ${formatDate(assignment.dueDate)} | <strong>Priority:</strong> ${assignment.priority}</p>
+                        <p><strong>Completion:</strong> ${completed}/${totalAssigned} students (${completionRate}%)</p>
+                        <div style="background: var(--gray-200); height: 10px; border-radius: 5px; overflow: hidden;">
+                            <div style="background: var(--success); width: ${completionRate}%; height: 100%;"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            return report;
+        }
+
+        function generatePracticeTimeReport() {
+            const students = appData.users.filter(u => !u.isTeacher);
+            
+            let report = '<h4>Practice Time Analysis</h4>';
+            let totalTime = 0;
+            let totalSessions = 0;
+            
+            students.forEach(student => {
+                const sessions = student.practiceSessions || [];
+                const studentTotal = sessions.reduce((total, session) => total + session.duration, 0);
+                const avgSession = sessions.length > 0 ? Math.round(studentTotal / sessions.length) : 0;
+                
+                totalTime += studentTotal;
+                totalSessions += sessions.length;
+                
+                report += `
+                    <div style="margin-bottom: 1rem; padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                        <h5>${student.username}</h5>
+                        <p><strong>Total Practice:</strong> ${formatTime(studentTotal)} in ${sessions.length} sessions</p>
+                        <p><strong>Average Session:</strong> ${formatTime(avgSession)}</p>
+                    </div>
+                `;
+            });
+            
+            const overallAvg = totalSessions > 0 ? Math.round(totalTime / totalSessions) : 0;
+            
+            report += `
+                <div style="margin-top: 2rem; padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-md);">
+                    <h5>Overall Statistics</h5>
+                    <p><strong>Total Practice Time:</strong> ${formatTime(totalTime)}</p>
+                    <p><strong>Total Sessions:</strong> ${totalSessions}</p>
+                    <p><strong>Average Session Length:</strong> ${formatTime(overallAvg)}</p>
+                </div>
+            `;
+            
+            return report;
+        }
+
+        // Notification Functions
+        function addStudentNotification(studentUsername, message) {
+            appData.studentNotifications.push({
+                id: Date.now(),
+                studentUsername,
+                message,
+                read: false,
+                timestamp: new Date().toISOString()
+            });
+        }
+
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type}`;
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.zIndex = '1000';
+            notification.style.minWidth = '300px';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                ${message}
+            `;
+
+            document.body.appendChild(notification);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Modal Functions
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Filter Functions
+        function initializeFilters() {
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('filter-btn')) {
+                    // Remove active class from siblings
+                    const siblings = e.target.parentElement.querySelectorAll('.filter-btn');
+                    siblings.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    e.target.classList.add('active');
+                    
+                    // Re-render based on current section
+                    const currentSection = document.querySelector('.content-section.active');
+                    if (currentSection) {
+                        loadSectionData(currentSection.id);
+                    }
+                }
+
+                if (e.target.classList.contains('priority-btn')) {
+                    const siblings = e.target.parentElement.querySelectorAll('.priority-btn');
+                    siblings.forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    selectedPriority = e.target.dataset.priority;
+                }
+
+                if (e.target.classList.contains('mood-option')) {
+                    document.querySelectorAll('.mood-option').forEach(option => option.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                    selectedMood = e.target.dataset.mood;
+                }
+            });
+
+            // Search functionality
+            document.addEventListener('input', function(e) {
+                if (e.target.id === 'assignment-search') {
+                    clearTimeout(e.target.searchTimeout);
+                    e.target.searchTimeout = setTimeout(() => {
+                        renderStudentAssignments();
+                    }, 300);
+                }
+            });
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize filters
+            initializeFilters();
+
+            // Login form
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const loginBtn = e.target.querySelector('.btn-primary');
+                const loginText = loginBtn.querySelector('.login-text');
+                const loadingText = loginBtn.querySelector('.loading');
+                
+                loginText.style.display = 'none';
+                loadingText.style.display = 'flex';
+                
+                setTimeout(() => {
+                    const username = document.getElementById('username').value.trim();
+                    const password = document.getElementById('password').value;
+                    
+                    if (login(username, password)) {
+                        document.getElementById('username').value = '';
+                        document.getElementById('password').value = '';
+                    } else {
+                        showNotification('Invalid username or password.', 'danger');
+                    }
+                    
+                    loginText.style.display = 'inline';
+                    loadingText.style.display = 'none';
+                }, 1000);
+            });
+
+            // Signup form
+            document.getElementById('signup-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('new-username').value.trim();
+                const password = document.getElementById('new-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                if (signup(username, password, confirmPassword)) {
+                    document.getElementById('new-username').value = '';
+                    document.getElementById('new-password').value = '';
+                    document.getElementById('confirm-password').value = '';
+                }
+            });
+
+            // Practice form
+            document.getElementById('practice-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const duration = document.getElementById('practice-duration').value;
+                const notes = document.getElementById('practice-notes').value;
+                
+                if (!selectedMood) {
+                    showNotification('Please select how your practice session went.', 'warning');
+                    return;
+                }
+                
+                logPracticeSession(duration, selectedMood, notes);
+                this.reset();
+                selectedMood = '';
+                document.querySelectorAll('.mood-option').forEach(option => option.classList.remove('selected'));
+            });
+
+            // Create assignment form
+            document.getElementById('create-assignment-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    title: document.getElementById('assignment-title').value.trim(),
+                    instructions: document.getElementById('assignment-instructions').value.trim(),
+                    practiceTime: document.getElementById('practice-time').value,
+                    dueDate: document.getElementById('due-date').value,
+                    assignedTo: Array.from(document.getElementById('assign-to').selectedOptions).map(option => option.value)
+                };
+
+                if (!formData.title || !formData.instructions || !formData.dueDate || formData.assignedTo.length === 0) {
+                    showNotification('Please fill in all required fields.', 'warning');
+                    return;
+                }
+
+                if (createAssignment(formData)) {
+                    this.reset();
+                    selectedPriority = 'medium';
+                    document.querySelectorAll('.priority-btn').forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('[data-priority="medium"]').classList.add('active');
+                    showSection('teacher-assignments');
+                }
+            });
+
+            // Grade form
+            document.getElementById('grade-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const studentUsername = document.getElementById('grade-student-name').value;
+                const week = document.getElementById('grade-week').value;
+                const grade = document.getElementById('grade-value').value;
+
+                if (!grade || !week) {
+                    showNotification('Please select both a grade and week.', 'warning');
+                    return;
+                }
+
+                saveGrade(studentUsername, week, grade);
+            });
+
+            // Navigation links
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('nav-link') || e.target.closest('.nav-link')) {
+                    e.preventDefault();
+                    const link = e.target.classList.contains('nav-link') ? e.target : e.target.closest('.nav-link');
+                    const sectionId = link.dataset.section;
+                    if (sectionId) showSection(sectionId);
+                }
+            });
+
+            // Modal close on background click
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('active');
+                }
+            });
+
+            // Set minimum date for assignments to today
+            const today = new Date().toISOString().split('T')[0];
+            const dueDateInput = document.getElementById('due-date');
+            if (dueDateInput) {
+                dueDateInput.min = today;
+            }
+        });
+
+        // Global functions for onclick handlers
+        window.showLogin = showLogin;
+        window.showSignup = showSignup;
+        window.showSection = showSection;
+        window.logout = logout;
+        window.viewAssignment = viewAssignment;
+        window.completeAssignment = completeAssignment;
+        window.deleteAssignment = deleteAssignment;
+        window.editAssignment = editAssignment;
+        window.gradeStudent = gradeStudent;
+        window.deleteStudent = deleteStudent;
+        window.closeModal = closeModal;
+        window.generateReport = generateReport;
+        window.toggleSidebar = toggleSidebar;
+        window.closeSidebar = closeSidebar;
+    </script>
+</body>
+</html>
